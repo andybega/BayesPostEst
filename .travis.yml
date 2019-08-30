@@ -7,6 +7,10 @@ cache: packages
 before_install:
   - sudo apt-get install jags
   - sudo apt-get install r-cran-rjags
+  - sudo apt-get install r-cran-rstan
+  - sudo apt-get install r-cran-rstanarm
+  - sudo apt-get install r-cran-mcmcpack
+  - sudo apt-get install r-cran-igraph
   - sudo apt-get install r-cran-bh
   - mkdir -p ~/.R
   - echo "CXX14FLAGS=-O3 -mtune=native -march=native -Wno-unused-variable -Wno-unused-function  -Wno-macro-redefined" >> ~/.R/Makevars
