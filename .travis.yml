@@ -3,6 +3,9 @@
 language: r
 sudo: required
 cache: packages
+
+r_build_args: '--no-build-vignettes'
+r_check_args: '--ignore-vignettes'
   
 before_install:
   - sudo apt-get install jags
