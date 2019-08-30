@@ -44,6 +44,9 @@ devtools::install_github("ShanaScogin/BayesPostEst")
 
 ```{r}
 library("BayesPostEst")
+
+library("rstan")
+BayesPostEst:::check_stan_example()
 ```
 
 
