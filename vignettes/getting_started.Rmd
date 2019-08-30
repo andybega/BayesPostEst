@@ -45,8 +45,7 @@ devtools::install_github("ShanaScogin/BayesPostEst")
 ```{r}
 library("BayesPostEst")
 
-library("rstan")
-BayesPostEst:::check_stan_example()
+pkgbuild::has_build_tools(debug = TRUE)
 ```
 
 
