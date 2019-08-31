@@ -1,10 +1,10 @@
 
-test_that("simple model works on travis", {
+test_that("simple jags model works on travis", {
   
   data("sim_data")
   
   ## formatting the data for jags
-  datjags <- as.list(data)
+  datjags <- as.list(sim_data)
   datjags$N <- length(datjags$Y)
   
   ## creating jags model
@@ -40,3 +40,35 @@ test_that("simple model works on travis", {
   
 })
 
+
+test_that("simple stan model works", {
+  
+  model_str <- "data {
+  int<lower=0> J;         // number of schools 
+  real y[J];              // estimated treatment effects
+  real<lower=0> sigma[J]; // standard error of effect estimates 
+}
+parameters {
+  real mu;                // population treatment effect
+  real<lower=0> tau;      // standard deviation in treatment effects
+  vector[J] eta;          // unscaled deviation from mu by school
+}
+transformed parameters {
+  vector[J] theta = mu + tau * eta;        // school treatment effects
+}
+model {
+  target += normal_lpdf(eta | 0, 1);       // prior log-density
+  target += normal_lpdf(y | theta, sigma); // log-likelihood
+}"
+  
+schools_dat <- list(J = 8, 
+                    y = c(28,  8, -3,  7, -1,  1, 18, 12),
+                    sigma = c(15, 10, 16, 11,  9, 11, 10, 18))
+
+expect_error(
+  fit <- stan(model_code = model_str, data = schools_dat,
+              chains = 2, warmup = 500, iter = 1000),
+  NA
+)
+  
+})
