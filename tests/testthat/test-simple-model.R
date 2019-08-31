@@ -66,7 +66,7 @@ schools_dat <- list(J = 8,
                     sigma = c(15, 10, 16, 11,  9, 11, 10, 18))
 
 expect_error(
-  fit <- stan(model_code = model_str, data = schools_dat,
+  fit <- rstan::stan(model_code = model_str, data = schools_dat,
               chains = 2, warmup = 500, iter = 1000),
   NA
 )
