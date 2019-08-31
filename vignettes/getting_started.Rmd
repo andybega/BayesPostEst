@@ -44,8 +44,6 @@ devtools::install_github("ShanaScogin/BayesPostEst")
 
 ```{r}
 library("BayesPostEst")
-
-pkgbuild::has_build_tools(debug = TRUE)
 ```
 
 
